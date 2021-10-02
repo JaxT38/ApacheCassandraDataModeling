@@ -6,9 +6,10 @@ A startup called Sparkify wants to analyze the data they've been collecting on s
 
 Since the queries are known ahead of time and the amount of data is potentially in terabytes, denormalized tables are created in Cassandra. This will help generate queries faster and use fewer resources. There are 3 queries to begin with:
 
-1. Give me the artist, song title and song's length in the music app history that was heard during sessionId = 338, and itemInSession = 4
+Query 1. I used 'sessionid' as the partition key and 'itemInSession' as my clustering key. Each partition is uniquely identified by 'sessionid' 
+while 'itemInSession' was used to uniquely identify the rows within a partition to sort the data by the value of int.
 
-2. Give me only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182
+Query 2. I used 'userId' and 'sessionid' as the composite partition key and 'itemInSession' as my clustering key. Each partition is uniquely identified by 'user id' and 'sessionid' while 'itemInSession' was used to uniquely identify the rows within a partition to sort the data by the value of int.
 
-3. Give me every user name (first and last) in my music app history who listened to the song 'All Hands Against His Own'
+Query 3. I used 'song' as the partition key and 'userid' as my clustering key. Each partition is uniquely identified by 'song' while 'userid' was used to uniquely identify the rows within a partition to sort the data by the value of int.
 
